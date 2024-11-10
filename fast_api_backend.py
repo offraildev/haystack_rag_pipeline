@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, UploadFile, File
 from pathlib import Path
 import shutil
@@ -5,7 +6,6 @@ from typing import Dict
 from pydantic import BaseModel
 from ingestion import ingestion_pipeline
 from query import query_pipeline
-import os
 
 app = FastAPI()
 UPLOAD_DIR = Path("uploads")
