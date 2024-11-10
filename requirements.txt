@@ -8,3 +8,8 @@ PyPDF2
 pypdf
 transformers[torch]
 sentence-transformers>=3.0.0
+fastapi
+uvicorn
+streamlit
+pydantic
+python-multipart

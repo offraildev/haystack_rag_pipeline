@@ -31,5 +31,34 @@ services:
       - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
       - xpack.security.enabled=false
 
+  fastapi:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - PG_CONN_STR=postgresql://admin:admin@db:5432/vector_db
+    command: uvicorn fast_api_backend:app --host 0.0.0.0 --port 8000 --reload
+
+  streamlit:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    depends_on:
+      - fastapi
+      - db
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - PG_CONN_STR=postgresql://admin:admin@db:5432/vector_db
+    command: streamlit run streamlit_frontend.py
+
 volumes:
   postgres_data:
