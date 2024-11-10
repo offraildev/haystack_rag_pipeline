@@ -1,0 +1,10 @@
+python-dotenv
+haystack-ai
+pgvector-haystack
+markdown-it-py 
+mdit_plain
+elasticsearch-haystack
+PyPDF2
+pypdf
+transformers[torch]
+sentence-transformers>=3.0.0
